@@ -175,7 +175,7 @@ export function addComplaint(input: { name: string; title: string; description: 
   return c;
 }
 
-export function updateComplaint(id: string, patch: Partial<Pick<Complaint, "status" | "department" | "priority">>) {
+export function updateComplaint(id: string, patch: { status?: Status; priority?: Priority; department?: string | undefined }) {
   const now = new Date().toISOString();
   save(load().map((c) => {
     if (c.id !== id) return c;

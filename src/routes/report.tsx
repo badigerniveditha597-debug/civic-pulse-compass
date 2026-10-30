@@ -58,8 +58,8 @@ function ReportPage() {
 
   async function onImage(file?: File) {
     if (!file) return;
-    if (!file.type.startsWith("image/")) return toast.error("Please choose an image file");
-    if (file.size > 8 * 1024 * 1024) return toast.error("Image must be under 8 MB");
+    if (!file.type.startsWith("image/")) { toast.error("Please choose an image file"); return; }
+    if (file.size > 8 * 1024 * 1024) { toast.error("Image must be under 8 MB"); return; }
     try { setImage(await resizeImage(file)); } catch { toast.error("Could not read that image"); }
   }
 
