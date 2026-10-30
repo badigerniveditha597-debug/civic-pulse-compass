@@ -86,7 +86,7 @@ function AdminDashboard() {
         <Panel title="Category-wise complaints">
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <div className="h-56 w-full sm:w-1/2">
-              <ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie data={byCategory} dataKey="value" nameKey="name" innerRadius={50} outerRadius={85} paddingAngle={2}>
                     {byCategory.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}
@@ -109,7 +109,7 @@ function AdminDashboard() {
         </Panel>
         <Panel title="Location-wise complaints">
           <div className="h-64">
-            <ResponsiveContainer>
+            <ResponsiveContainer width="100%" height="100%">
               <BarChart data={byArea} layout="vertical" margin={{ left: 10, right: 10 }}>
                 <CartesianGrid horizontal={false} stroke="var(--border)" />
                 <XAxis type="number" allowDecimals={false} tick={{ fontSize: 12 }} />
