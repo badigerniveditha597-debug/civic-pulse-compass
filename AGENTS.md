@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Complaint data lives in a frontend-only localStorage store (src/lib/complaints.ts) with deterministic seed data; why: hackathon demo with no backend, and fixed seed timestamps keep SSR and hydration identical.

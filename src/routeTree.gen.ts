@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as MyComplaintsRouteImport } from './routes/my-complaints'
+import { Route as ReportRouteImport } from './routes/report'
+import { Route as AdminComplaintIdRouteImport } from './routes/admin_.complaint.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyComplaintsRoute = MyComplaintsRouteImport.update({
+  id: '/my-complaints',
+  path: '/my-complaints',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminComplaintIdRoute = AdminComplaintIdRouteImport.update({
+  id: '/admin_/complaint/$id',
+  path: '/admin/complaint/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/my-complaints': typeof MyComplaintsRoute
+  '/report': typeof ReportRoute
+  '/admin/complaint/$id': typeof AdminComplaintIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/my-complaints': typeof MyComplaintsRoute
+  '/report': typeof ReportRoute
+  '/admin/complaint/$id': typeof AdminComplaintIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/my-complaints': typeof MyComplaintsRoute
+  '/report': typeof ReportRoute
+  '/admin_/complaint/$id': typeof AdminComplaintIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/admin' | '/my-complaints' | '/report' | '/admin/complaint/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/admin' | '/my-complaints' | '/report' | '/admin/complaint/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/my-complaints'
+    | '/report'
+    | '/admin_/complaint/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  MyComplaintsRoute: typeof MyComplaintsRoute
+  ReportRoute: typeof ReportRoute
+  AdminComplaintIdRoute: typeof AdminComplaintIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-complaints': {
+      id: '/my-complaints'
+      path: '/my-complaints'
+      fullPath: '/my-complaints'
+      preLoaderRoute: typeof MyComplaintsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin_/complaint/$id': {
+      id: '/admin_/complaint/$id'
+      path: '/admin/complaint/$id'
+      fullPath: '/admin/complaint/$id'
+      preLoaderRoute: typeof AdminComplaintIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  MyComplaintsRoute: MyComplaintsRoute,
+  ReportRoute: ReportRoute,
+  AdminComplaintIdRoute: AdminComplaintIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
