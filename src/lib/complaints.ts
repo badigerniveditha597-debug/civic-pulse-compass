@@ -25,12 +25,12 @@ export interface Complaint {
   category: Category;
   location: string;
   area: string;
-  image?: string;
+  image?: string | undefined;
   status: Status;
   priority: Priority;
   aiScore: number;
   aiReason: string;
-  department?: string;
+  department?: string | undefined;
   createdAt: string;
   updatedAt: string;
   timeline: TimelineEvent[];
@@ -115,7 +115,7 @@ function buildSeed(): Complaint[] {
       id: `CP-2026-${String(482100 + i * 137).padStart(6, "0")}`,
       name, title, description, category, location, area: extractArea(location),
       status, priority: t.priority, aiScore: t.score, aiReason: t.reason, department,
-      createdAt: created, updatedAt: timeline[timeline.length - 1].at, timeline,
+      createdAt: created, updatedAt: timeline[timeline.length - 1]!.at, timeline,
     };
   });
 }
@@ -158,7 +158,7 @@ export function useMyComplaintIds() {
   return useSyncExternalStore(subscribe, loadMine, () => EMPTY);
 }
 
-export function addComplaint(input: { name: string; title: string; description: string; category: Category; location: string; image?: string }) {
+export function addComplaint(input: { name: string; title: string; description: string; category: Category; location: string; image?: string | undefined }) {
   const all = load();
   const t = triage(input.category, input.title, input.description);
   const now = new Date().toISOString();

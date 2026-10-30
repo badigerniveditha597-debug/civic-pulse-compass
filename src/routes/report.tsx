@@ -50,7 +50,7 @@ const empty = { name: "", title: "", description: "", category: "" as Category |
 function ReportPage() {
   const [form, setForm] = useState(empty);
   const [image, setImage] = useState<string>();
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"title" | "description" | "category" | "location", string>>>({});
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState<Complaint | null>(null);
 
@@ -65,7 +65,7 @@ function ReportPage() {
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const err: Record<string, string> = {};
+    const err: Partial<Record<"title" | "description" | "category" | "location", string>> = {};
     if (form.title.trim().length < 5) err.title = "Title must be at least 5 characters";
     if (form.description.trim().length < 10) err.description = "Please describe the issue (min 10 characters)";
     if (!form.category) err.category = "Select a category";
@@ -161,7 +161,7 @@ function ReportPage() {
   );
 }
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+function Field({ label, error, children }: { label: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label>{label}</Label>
