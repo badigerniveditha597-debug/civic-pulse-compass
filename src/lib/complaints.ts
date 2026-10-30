@@ -103,7 +103,7 @@ const SEEDS: Seed[] = [
 ];
 
 function buildSeed(): Complaint[] {
-  const now = Date.now();
+  const now = Date.parse("2026-10-30T06:00:00Z"); // fixed anchor keeps SSR and browser identical
   return SEEDS.map(([name, title, description, category, location, status, daysAgo, department], i) => {
     const t = triage(category, title, description);
     const created = new Date(now - daysAgo * 86400000 - i * 3600000).toISOString();
@@ -200,4 +200,4 @@ export function countBy<T extends string>(list: Complaint[], key: (c: Complaint)
 }
 
 export const formatDate = (iso: string) =>
-  new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata" });
