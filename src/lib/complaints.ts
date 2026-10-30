@@ -70,7 +70,7 @@ export function triage(category: Category, title: string, description: string): 
 
 export function extractArea(location: string) {
   const parts = location.split(",").map((p) => p.trim()).filter(Boolean);
-  return parts.length > 1 ? parts[parts.length - 2] : parts[0] || "Unknown";
+  return (parts.length > 1 ? parts[parts.length - 2] : parts[0]) ?? "Unknown";
 }
 
 export function generateId(existing: Set<string>) {
